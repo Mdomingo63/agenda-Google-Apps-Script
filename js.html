@@ -1,4 +1,28 @@
 <script>
 
-    
+   function  crearTablaContactos(){
+          
+    google.script.run.withSuccessHandler(
+
+         function(obj){
+
+           let tabla = document.createElement("tabla");
+           let tablaBody = document.createElement("tbody");
+
+           Array.from(obj).forEach(filaActual =>{
+
+                let fila = document.createElement("tr");
+                filaActual.forEach(celdaActual =>{
+                   
+                      let celda = document
+
+                })
+
+           })
+
+         }
+
+    ).obtenerContactos();
+
+   }
 </script>
