@@ -14,11 +14,24 @@
                 let fila = document.createElement("tr");
                 filaActual.forEach(celdaActual =>{
                    
-                      let celda = document
+                      let celda = document.createElement("td");
+                      celda.textContent = celdaActual;
+                      fila.appendChild(celda);
+                });
 
-                })
+                tablaBody.appendChild(fila);
 
-           })
+           });
+
+           // AGREGAMOS EL CUERPO A  LA TABLA
+              tabla.appendChild("tablaBody");
+
+            // AGREGAMOS ESTILOS DE BOOTSRAP A LA TABLA
+
+              tabla.classList.add("table", "table-striped","border", "border-3", "table-success");
+
+              //  AGREGAMOS LA TABLA AL DIV CON ID divContactos
+              document.getElementById("divContactos").appendChild(tabla);
 
          }
 
