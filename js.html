@@ -16,7 +16,23 @@
 
             // SOLUCION UN BUCLE FOR
 
-            for(let i =0; i< obj.length; i++){
+            // ESTE PRIMER BUCLE RECORRE LA CABECERA LA TABLA POR ES OBJ[0]
+             
+             let primeraFila = document.createElement('tr');
+
+            for(let i = 0; i < obj[0].length; i++){
+              
+                    let celda = document.createElement('td');
+                    celda.textContent = obj[0][i];
+                    primeraFila.appendChild(celda);
+ 
+            }
+
+                    tablaHeader.appendChild(primeraFila);
+                    tabla.appendChild(tablaHeader);
+
+              // ESTE BUCLE RECORRE EL CUERPO DE LA TABLA POR OBJ[i][j], i es la fila y j la celda
+            for(let i = 1; i< obj.length; i++){
               
                    let fila = document.createElement('tr');
                    for(let j = 0; j < obj[i].length; j++){
@@ -26,12 +42,9 @@
                     fila.appendChild(celda);
 
                    }
-                   if(i == 0){
-                    tablaHeader.appendChild(fila);
-                    tabla.appendChild(tablaHeader);
-                 }else{
+                   
                     tablaBody.appendChild(fila);
-                 }
+                 
             }
 
 
