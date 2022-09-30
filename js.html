@@ -14,7 +14,31 @@
            let tablaHeader = document.createElement("thead");
            let tablaBody = document.createElement("tbody");
 
-           Array.from(obj).forEach((filaActual, i) =>{
+            // SOLUCION UN BUCLE FOR
+
+            for(let i =0; i< obj.length; i++){
+              
+                   let fila = document.createElement('tr');
+                   for(let j = 0; j < obj[i].length; j++){
+                      
+                    let celda = document.createElement('td');
+                    celda.textContent = obj[i][j];
+                    fila.appendChild(celda);
+
+                   }
+                   if(i == 0){
+                    tablaHeader.appendChild(fila);
+                    tabla.appendChild(tablaHeader);
+                 }else{
+                    tablaBody.appendChild(fila);
+                 }
+            }
+
+
+
+             // SOLUCION CON EL BUCLE FOREACH
+
+           /* Array.from(obj).forEach((filaActual, i) =>{
 
                 let fila = document.createElement("tr");
                 filaActual.forEach(celdaActual =>{
@@ -32,7 +56,7 @@
                  }
                 
            });
-
+ */
              //AGREGAMOS CLASES DE BOOTSTRAP A LA CABECERA
         
              tablaHeader.classList.add('table-dark');
