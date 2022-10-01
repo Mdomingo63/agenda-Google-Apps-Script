@@ -5,12 +5,18 @@
         let tabla = document.getElementById("tablaContactos");
         if(tabla) tabla.remove();
 
-    google.script.run.withSuccessHandler(
+    google.script.run
+    .withSuccessHandler(crearTablaContactosCorrectamente)
+    .withFailureHandler(crearTablaContactosError)
+    .obtenerContactos();
+    
+  }
 
-         function(obj){
+   function crearTablaContactosCorrectamente(obj){
           
            tabla = document.createElement("table");
            tabla.id = 'tablaContactos';
+
            let tablaHeader = document.createElement("thead");
            let tablaBody = document.createElement("tbody");
 
@@ -46,30 +52,6 @@
                     tablaBody.appendChild(fila);
                  
             }
-
-
-
-             // SOLUCION CON EL BUCLE FOREACH
-
-           /* Array.from(obj).forEach((filaActual, i) =>{
-
-                let fila = document.createElement("tr");
-                filaActual.forEach(celdaActual =>{
-                   
-                      let celda = document.createElement("td");
-                      celda.textContent = celdaActual;
-                      fila.appendChild(celda);
-                });
-
-                 if(i == 0){
-                    tablaHeader.appendChild(fila);
-                    tabla.appendChild(tablaHeader);
-                 }else{
-                    tablaBody.appendChild(fila);
-                 }
-                
-           });
- */
              //AGREGAMOS CLASES DE BOOTSTRAP A LA CABECERA
         
              tablaHeader.classList.add('table-dark');
@@ -84,9 +66,40 @@
               //  AGREGAMOS LA TABLA AL DIV CON ID divContactos
               document.getElementById("divContactos").appendChild(tabla);
 
+              // MOSTRAR NOTIFICACION DE OK
+
+              crearNotificacion(1, 'Contactos obtenidos correctamente', 'Todo en orden');
+
+
          }
 
-    ).obtenerContactos();
 
-   }
+         function crearTablaContactosError(){
+            // MOSTRAR NOTIFICACION DE ERROR
+         }
+
+
+         function crearNotificacion(tipo, mensaje, titulo){
+
+            let mensajeNotificacion = document.getElementById('mensajeNotificacion');
+            let tituloNotificacion = document.getElementById('tituloNotificacion');
+            let elementoNotificacion = document.getElementById('notificacion');
+            let iconoNotificacion = document.getElementById('iconoNotificacion');
+            let notificacion = bootstrap.Toast.getOrCreateInstance(elementoNotificacion);
+
+      // EDITAR NOTIFICACION
+
+            iconoNotificacion.className = '';
+            iconoNotificacion.classList.add('bi','bi-check2-square');
+            mensajeNotificacion.textContent = mensaje;
+            tituloNotificacion.textContent = titulo;
+            elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--color-verde-oscuro');
+
+       // MOSTRAR LA NOTIFICACION
+
+           notificacion.show();
+
+
+         }
+   
 </script>
